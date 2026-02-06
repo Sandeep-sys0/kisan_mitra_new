@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Register | Kisan Mitra</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#f1f8e9;
+}
+.container{
+    width:350px;
+    margin:80px auto;
+    background:white;
+    padding:20px;
+    box-shadow:0 0 10px #aaa;
+}
+input,button{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+}
+button{
+    background:#2e7d32;
+    color:white;
+    border:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>Register</h2>
+
+<input type="text" id="username" placeholder="Username">
+<input type="password" id="password" placeholder="Password">
+<button onclick="register()">Register</button>
+
+<p>Already registered? <a href="login.html">Login</a></p>
+</div>
+
+<script>
+function register(){
+    let user = document.getElementById("username").value;
+    let pass = document.getElementById("password").value;
+
+    if(user=="" || pass==""){
+        alert("Please fill all fields");
+        return;
+    }
+
+    localStorage.setItem("username", user);
+    localStorage.setItem("password", pass);
+
+    alert("Registration Successful");
+    window.location.href="login.html";
+}
+</script>
+
+</body>
+</html>

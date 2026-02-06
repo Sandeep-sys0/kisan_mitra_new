@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard | Kisan Mitra</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#f4f6f8;
+}
+
+header{
+    background:#2e7d32;
+    color:white;
+    padding:15px;
+    text-align:center;
+}
+
+.container{
+    display:flex;
+    justify-content:space-around;
+    padding:20px;
+}
+
+.card{
+    width:22%;
+    background:#ffffff;
+    border-radius:6px;
+    padding:15px;
+    box-shadow:0 0 8px rgba(0,0,0,0.1);
+}
+
+.card h3{
+    margin-top:0;
+    color:#2e7d32;
+}
+
+select{
+    width:100%;
+    padding:8px;
+    margin-top:8px;
+}
+
+.logout{
+    text-align:center;
+    margin:20px;
+}
+
+button{
+    padding:10px 20px;
+    background:#c62828;
+    color:white;
+    border:none;
+    border-radius:4px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h2>Dashboard</h2>
+    <p id="welcome"></p>
+</header>
+
+<div class="container">
+
+    <!-- SELECTED CROP -->
+    <div class="card">
+        <h3>Selected Crop</h3>
+        <select id="cropSelect" onchange="updateCrop()">
+            <option value="">-- Select Crop --</option>
+            <option value="Wheat">Wheat</option>
+            <option value="Rice">Rice</option>
+            <option value="Maize">Maize</option>
+            <option value="Cotton">Cotton</option>
+        </select>
+        <p id="cropText">No crop selected</p>
+    </div>
+
+    <!-- FERTILIZER -->
+    <div class="card">
+        <h3>Fertilizer Advice</h3>
+        <p id="fertilizer">Select crop first</p>
+    </div>
+
+    <!-- PEST -->
+    <div class="card">
+        <h3>Pest Alert</h3>
+        <p id="pest">Select crop first</p>
+    </div>
+
+    <!-- WEATHER -->
+    <div class="card">
+        <h3>Weather Advisory</h3>
+        <p>Based on seasonal climate suitability.</p>
+    </div>
+
+</div>
+
+<div class="logout">
+    <button onclick="logout()">Logout</button>
+</div>
+
+<script>
+let user = localStorage.getItem("username");
+if(!user){
+    window.location.href = "login.html";
+}
+document.getElementById("welcome").innerText =
+    "Welcome " + user;
+
+let savedCrop = localStorage.getItem("selectedCrop");
+if(savedCrop){
+    document.getElementById("cropSelect").value = savedCrop;
+    applyLogic(savedCrop);
+}
+
+function updateCrop(){
+    let crop = document.getElementById("cropSelect").value;
+    localStorage.setItem("selectedCrop", crop);
+    applyLogic(crop);
+}
+
+function applyLogic(crop){
+    if(crop === ""){
+        document.getElementById("cropText").innerText = "No crop selected";
+        document.getElementById("fertilizer").innerText = "Select crop first";
+        document.getElementById("pest").innerText = "Select crop first";
+        return;
+    }
+
+    document.getElementById("cropText").innerText = crop;
+
+    if(crop === "Wheat"){
+        document.getElementById("fertilizer").innerText = "Urea & DAP recommended";
+        document.getElementById("pest").innerText = "Aphids risk";
+    }
+    else if(crop === "Rice"){
+        document.getElementById("fertilizer").innerText = "Nitrogen fertilizer";
+        document.getElementById("pest").innerText = "Brown planthopper";
+    }
+    else if(crop === "Maize"){
+        document.getElementById("fertilizer").innerText = "NPK fertilizer";
+        document.getElementById("pest").innerText = "Stem borer";
+    }
+    else if(crop === "Cotton"){
+        document.getElementById("fertilizer").innerText = "Potassium fertilizer";
+        document.getElementById("pest").innerText = "Bollworm alert";
+    }
+}
+
+function logout(){
+    localStorage.clear();
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>

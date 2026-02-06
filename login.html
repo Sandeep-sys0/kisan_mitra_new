@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login | Kisan Mitra</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#e8f5e9;
+}
+.container{
+    width:350px;
+    margin:80px auto;
+    background:white;
+    padding:20px;
+    box-shadow:0 0 10px #aaa;
+}
+input,button{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+}
+button{
+    background:#1b5e20;
+    color:white;
+    border:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>Login</h2>
+
+<input type="text" id="username" placeholder="Username">
+<input type="password" id="password" placeholder="Password">
+<button onclick="login()">Login</button>
+</div>
+
+<script>
+function login(){
+    let user = document.getElementById("username").value;
+    let pass = document.getElementById("password").value;
+
+    let storedUser = localStorage.getItem("username");
+    let storedPass = localStorage.getItem("password");
+
+    if(user===storedUser && pass===storedPass){
+        alert("Login Successful");
+        window.location.href="dashboard.html";
+    } else {
+        alert("Invalid Username or Password");
+    }
+}
+</script>
+
+</body>
+</html>

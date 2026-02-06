@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Fertilizer Advisory | Kisan Mitra</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#f1f8e9;
+}
+
+header{
+    background:#2e7d32;
+    color:white;
+    padding:15px;
+    text-align:center;
+}
+
+.container{
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:15px;
+    margin-bottom:20px;
+    border-radius:6px;
+    box-shadow:0 0 8px rgba(0,0,0,0.1);
+}
+
+.card h3{
+    color:#2e7d32;
+}
+
+select{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+}
+.media-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.media-box {
+    width: 300px;              /* medium size */
+    text-align: center;
+}
+
+.media-box img,
+.media-box video {
+    width: 100%;
+    height: 200px;             /* controls vertical size */
+    object-fit: cover;         /* PREVENTS STRETCHING */
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+.media-box p {
+    margin-top: 10px;
+    font-weight: 600;
+    color: #2e7d32;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h2>Fertilizer Advisory</h2>
+    <p>Smart fertilizer recommendations based on crop</p>
+</header>
+
+<div class="container">
+
+<!-- CROP SELECTION -->
+<div class="card">
+    <h3>Select Crop</h3>
+    <select id="cropSelect" onchange="updateFertilizer()">
+        <option value="">-- Select Crop --</option>
+        <option value="Wheat">Wheat</option>
+        <option value="Rice">Rice</option>
+        <option value="Maize">Maize</option>
+        <option value="Cotton">Cotton</option>
+    </select>
+</div>
+
+<!-- FERTILIZER DETAILS -->
+<div class="card">
+    <h3>Recommended Fertilizer</h3>
+    <p id="fertilizerText">Select crop to see fertilizer recommendation.</p>
+</div>
+
+<!-- DOSAGE (NEW DATA – THIS IS YOUR EXTRA LOGIC) -->
+<div class="card">
+    <h3>Fertilizer Dosage</h3>
+    <p id="dosageText">Select crop to see dosage details.</p>
+</div>
+
+<!-- IMAGES & VIDEOS (KEEP SAME AS YOUR OLD PAGE) -->
+<div class="media-container">
+
+    <div class="media-box">
+        <img src="fertilizer.jpg" alt="Fertilizer Image">
+        <p>Recommended Fertilizers</p>
+    </div>
+
+    <div class="media-box">
+        <video controls>
+            <source src="fertilizer.mp4" type="video/mp4">
+        </video>
+        <p>Application Demonstration</p>
+    </div>
+
+</div>
+
+</div>
+
+<script>
+function updateFertilizer(){
+    let crop = document.getElementById("cropSelect").value;
+
+    if(crop === ""){
+        document.getElementById("fertilizerText").innerText =
+            "Select crop to see fertilizer recommendation.";
+        document.getElementById("dosageText").innerText =
+            "Select crop to see dosage details.";
+        return;
+    }
+
+    if(crop === "Wheat"){
+        document.getElementById("fertilizerText").innerText =
+            "Urea and DAP are recommended for wheat.";
+        document.getElementById("dosageText").innerText =
+            "Urea: 120 kg/hectare, DAP: 100 kg/hectare.";
+    }
+    else if(crop === "Rice"){
+        document.getElementById("fertilizerText").innerText =
+            "Nitrogen-rich fertilizer is suitable for rice.";
+        document.getElementById("dosageText").innerText =
+            "Nitrogen: 150 kg/hectare in split doses.";
+    }
+    else if(crop === "Maize"){
+        document.getElementById("fertilizerText").innerText =
+            "NPK fertilizer improves maize yield.";
+        document.getElementById("dosageText").innerText =
+            "NPK: 120:60:40 kg/hectare.";
+    }
+    else if(crop === "Cotton"){
+        document.getElementById("fertilizerText").innerText =
+            "Potassium fertilizer improves cotton quality.";
+        document.getElementById("dosageText").innerText =
+            "Potassium: 60 kg/hectare.";
+    }
+}
+</script>
+
+</body>
+</html>
